@@ -1,0 +1,10 @@
+app_name: Conversion Engine
+submission_mode: interim
+icp_threshold: 0.62
+outreach_tone: consultative
+hubspot_sandbox: true
+calcom_sandbox: true
+africastalking_sandbox: true
+resend_sandbox: true
+langfuse_enabled: true
+langfuse_project: conversion-engine
