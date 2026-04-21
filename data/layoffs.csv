@@ -1,0 +1,4 @@
+company_id,layoffs_reported,source
+cmp_001,false,public_press_release
+cmp_002,true,regulatory_disclosure
+cmp_003,false,public_press_release

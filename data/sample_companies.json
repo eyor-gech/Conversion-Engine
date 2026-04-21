@@ -1,0 +1,50 @@
+[
+  {
+    "company_id": "cmp_001",
+    "name": "NileLedger",
+    "domain": "nileledger.com",
+    "industry": "fintech",
+    "employee_count": 420,
+    "founded_year": 2018,
+    "latest_funding_date": "2025-11-18T00:00:00",
+    "latest_funding_round": "Series B",
+    "leadership_changes": ["New CTO joined in Q1 2026"],
+    "open_roles": ["Senior AI Engineer", "Data Engineer", "Product Manager"],
+    "layoffs_reported": false,
+    "tech_stack": ["AWS", "Snowflake", "OpenAI"],
+    "exec_public_mentions": ["CEO discussed practical AI deployment in earnings call"],
+    "github_activity_score": 0.71
+  },
+  {
+    "company_id": "cmp_002",
+    "name": "ClinixFlow",
+    "domain": "clinixflow.io",
+    "industry": "healthtech",
+    "employee_count": 1200,
+    "founded_year": 2012,
+    "latest_funding_date": "2024-09-01T00:00:00",
+    "latest_funding_round": "Growth",
+    "leadership_changes": [],
+    "open_roles": ["MLOps Engineer", "Sales Ops Analyst"],
+    "layoffs_reported": true,
+    "tech_stack": ["Azure", "Databricks"],
+    "exec_public_mentions": ["COO said AI assist workflows are in pilot"],
+    "github_activity_score": 0.45
+  },
+  {
+    "company_id": "cmp_003",
+    "name": "AtlasProcure",
+    "domain": "atlasprocure.com",
+    "industry": "supply_chain",
+    "employee_count": 260,
+    "founded_year": 2020,
+    "latest_funding_date": null,
+    "latest_funding_round": null,
+    "leadership_changes": ["VP Revenue hired"],
+    "open_roles": ["Backend Engineer", "RevOps Manager"],
+    "layoffs_reported": false,
+    "tech_stack": ["GCP", "PostgreSQL"],
+    "exec_public_mentions": ["Leadership discussing process automation"],
+    "github_activity_score": 0.33
+  }
+]
