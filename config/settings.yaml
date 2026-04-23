@@ -8,3 +8,7 @@ africastalking_sandbox: true
 resend_sandbox: true
 langfuse_enabled: true
 langfuse_project: conversion-engine
+mock_mode: true
+openrouter_api_key: ""
+max_llm_concurrency: 2
+max_tool_concurrency: 4

@@ -2,3 +2,10 @@ coneng/
 __pycache__/
 .env
 codex/
+data/
+act2_log.json
+all_test.py
+score_log.json
+trace_log.json
+trace_log.jsonl
+baseline.md

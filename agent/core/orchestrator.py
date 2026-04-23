@@ -2,13 +2,14 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 from pathlib import Path
 from typing import Literal
 
 import yaml
 
 from agent.conversation.reply_handler import handle_reply
-from agent.core.config import AppSettings, Paths
+from agent.core.config import AppSettings, Paths, apply_env_overrides
 from agent.core.state import EngineRunReport
 from agent.core.tracing import LangfuseTracer
 from agent.intelligence.insight_engine import build_insight_packet
@@ -32,7 +33,7 @@ from pipelines.ingestion.layoffs_loader import load_layoff_flags
 
 def load_settings(path: Path) -> AppSettings:
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
-    return AppSettings.model_validate(data)
+    return apply_env_overrides(AppSettings.model_validate(data))
 
 
 class ConversionOrchestrator:
@@ -41,10 +42,10 @@ class ConversionOrchestrator:
         self.paths = paths or Paths()
         self.tracer = LangfuseTracer(enabled=settings.langfuse_enabled, project=settings.langfuse_project)
         self.feature_store = FeatureStore()
-        self.hubspot = HubSpotClient(sandbox=settings.hubspot_sandbox)
-        self.resend = ResendClient(sandbox=settings.resend_sandbox)
-        self.sms = AfricasTalkingClient(sandbox=settings.africastalking_sandbox)
-        self.calcom = CalComClient(sandbox=settings.calcom_sandbox)
+        self.hubspot = HubSpotClient(sandbox=settings.hubspot_sandbox, mock_mode=settings.mock_mode)
+        self.resend = ResendClient(sandbox=settings.resend_sandbox, mock_mode=settings.mock_mode)
+        self.sms = AfricasTalkingClient(sandbox=settings.africastalking_sandbox, mock_mode=settings.mock_mode)
+        self.calcom = CalComClient(sandbox=settings.calcom_sandbox, mock_mode=settings.mock_mode)
 
     async def run(self, mode: Literal["interim", "final"]) -> EngineRunReport:
         companies = load_companies(self.paths.data_dir / "sample_companies.json")
@@ -55,7 +56,10 @@ class ConversionOrchestrator:
         crm_records = 0
 
         for company in companies:
-            company.layoffs_reported = layoffs_map.get(company.company_id, company.layoffs_reported)
+            company.layoffs_reported = layoffs_map.get(
+                company.company_id,
+                layoffs_map.get(company.name.lower(), company.layoffs_reported),
+            )
             baseline = job_baselines.get(company.company_id, len(company.open_roles))
             scored = run_signal_pipeline(company, baseline, self.settings.icp_threshold)
             self.feature_store.upsert(scored)
@@ -129,6 +133,11 @@ class ConversionOrchestrator:
 def build_orchestrator() -> ConversionOrchestrator:
     paths = Paths()
     settings = load_settings(paths.config_path)
+    os.environ.setdefault("MAX_LLM_CONCURRENCY", str(settings.max_llm_concurrency))
+    os.environ.setdefault("MAX_TOOL_CONCURRENCY", str(settings.max_tool_concurrency))
+    os.environ.setdefault("MOCK_MODE", "true" if settings.mock_mode else "false")
+    if settings.openrouter_api_key:
+        os.environ.setdefault("OPENROUTER_API_KEY", settings.openrouter_api_key)
     return ConversionOrchestrator(settings=settings, paths=paths)
 
 

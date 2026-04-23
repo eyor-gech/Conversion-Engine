@@ -15,14 +15,18 @@ class LangfuseTracer:
     def log(self, event_type: str, payload: dict[str, Any]) -> None:
         if not self.enabled:
             return
-        self.events.append(
-            {
-                "project": self.project,
-                "event_type": event_type,
-                "payload": payload,
-                "timestamp": datetime.utcnow().isoformat(),
-            }
-        )
+        try:
+            self.events.append(
+                {
+                    "project": self.project,
+                    "event_type": event_type,
+                    "payload": payload,
+                    "timestamp": datetime.utcnow().isoformat(),
+                }
+            )
+        except Exception:
+            # Observability failures must never block pipeline execution.
+            return
 
     def export(self) -> list[dict[str, Any]]:
         return list(self.events)
