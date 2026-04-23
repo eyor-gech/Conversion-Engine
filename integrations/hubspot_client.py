@@ -19,3 +19,26 @@ class HubSpotClient:
         deal = {"company": company, "stage": stage, "amount": amount, "sandbox": self.sandbox, "mock_mode": self.mock_mode}
         self.deals.append(deal)
         return deal
+
+    async def upsert_enrichment(self, prospect_id: str, icp_segment: str, signal_summary: str, enrichment_timestamp: str) -> dict[str, Any]:
+        record = {
+            "prospect_id": prospect_id,
+            "icp_segment": icp_segment,
+            "signal_enrichment_summary": signal_summary,
+            "enrichment_timestamp": enrichment_timestamp,
+            "sandbox": self.sandbox,
+            "mock_mode": self.mock_mode,
+        }
+        self.contacts.append(record)
+        return record
+
+    async def update_booking_summary(self, prospect_id: str, booking_summary: str, booking_payload: dict[str, Any]) -> dict[str, Any]:
+        event = {
+            "prospect_id": prospect_id,
+            "booking_summary": booking_summary,
+            "booking_payload": booking_payload,
+            "sandbox": self.sandbox,
+            "mock_mode": self.mock_mode,
+        }
+        self.deals.append(event)
+        return event
