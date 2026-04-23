@@ -1,23 +1,20 @@
 # Conversion Engine (Tenacious)
 
-Production-ready, deterministic B2B lead conversion system for discovery, enrichment, ICP scoring, outreach, conversation routing, CRM sync, scheduling, and evaluation.
+Production-grade B2B lead conversion system with LLM-orchestrated enrichment, bidirectional outreach handling, CRM/calendar linkage, and evaluation.
 
 ## Architecture
 
 ```mermaid
 flowchart TD
-    A[Structured Inputs] --> B[Ingestion Pipelines]
-    B --> C[Signal + AI Maturity Scoring]
-    C --> D[ICP Classifier + Guardrails]
-    D --> E[Insight Engine]
-    E --> F[Outreach Generator + Validator]
-    F --> G[Conversation Engine]
-    G --> H[HubSpot + Cal.com + SMS]
-    C --> I[Eval Layer tau2 + Probes]
-    D --> J[Langfuse Trace Log]
-    F --> J
-    G --> J
-    I --> J
+    A["Integration Layer (APIs, scraping, webhooks)"] --> B["LLM Reasoning Layer (OpenRouter)"]
+    B --> C["Routing Layer (Email/SMS Event Bus)"]
+    C --> D["Storage Layer (Structured artifacts)"]
+    D --> E["HubSpot + Cal.com + Outreach Ops"]
+    E --> F["Eval Layer (tau2 + probes)"]
+    B --> G["Langfuse Trace Log"]
+    C --> G
+    E --> G
+    F --> G
 ```
 
 ## Repository Layout
@@ -59,6 +56,8 @@ uvicorn main:app --reload
 - `POST /run/interim`
 - `POST /run/final`
 - `GET /traces`
+- `POST /webhooks/email`
+- `POST /webhooks/sms`
 
 ## Interim Submission Coverage
 
