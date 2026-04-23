@@ -33,12 +33,12 @@ class OpenRouterClient:
         self.api_key = os.getenv("OPENROUTER_API_KEY") or _read_dotenv_value("OPENROUTER_API_KEY") or ""
         self.mock_mode = os.getenv("MOCK_MODE", "true").lower() == "true"
         self.models: dict[str, str] = {
-            "eval": "openai/gpt-5",
-            "reasoning": "anthropic/claude-3.7-sonnet",
-            "classification": "openai/gpt-4.1-mini",
+            "eval": "openai/gpt-4o-mini",
+            "reasoning": "gemini/gemini-2.5-flash",
+            "classification": "openai/gpt-4o-mini",
             "summarization": "google/gemini-2.0-flash-lite",
         }
-
+ 
     def model_for(self, task_type: TaskType) -> str:
         return self.models[task_type]
 

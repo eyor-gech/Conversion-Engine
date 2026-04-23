@@ -34,13 +34,13 @@ def _write_baseline(path: Path, score: dict[str, object]) -> None:
 
 
 def run_act_i(output_dir: Path) -> dict[str, object]:
-    score = run_tau2_dev_slice_sync(task_count=30, trials=5, output_dir=output_dir)
+    score = run_tau2_dev_slice_sync(task_count=30, trials=2, output_dir=output_dir)
     _write_baseline(output_dir / "baseline.md", score)
     return score
 
 
 async def run_act_ii(output_dir: Path) -> dict[str, object]:
-    os.environ.setdefault("MOCK_MODE", "true")
+    os.environ.setdefault("MOCK_MODE", "false")
     orchestrator = build_orchestrator()
 
     companies = load_companies(orchestrator.paths.data_dir / "sample_companies.json")
