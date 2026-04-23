@@ -6,11 +6,18 @@ from pathlib import Path
 from typing import Literal
 
 from fastapi import FastAPI
+from fastapi import Request
 from fastapi.responses import JSONResponse
 
+from agent.outreach.email_handler import EmailHandler
+from agent.outreach.sms_handler import SmsHandlerService
 from agent.core.orchestrator import build_orchestrator
 
 app = FastAPI(title="Conversion Engine", version="1.0.0")
+
+_orchestrator = build_orchestrator()
+_email_handler = EmailHandler(resend_client=_orchestrator.resend)
+_sms_handler = SmsHandlerService(africastalking_client=_orchestrator.sms)
 
 
 @app.get("/health")
@@ -33,6 +40,20 @@ async def traces() -> JSONResponse:
     if not path.exists():
         return JSONResponse(content={"events": []})
     return JSONResponse(content={"events": json.loads(path.read_text(encoding="utf-8"))})
+
+
+@app.post("/webhooks/email")
+async def email_webhook(request: Request) -> JSONResponse:
+    payload = await request.json()
+    result = await _email_handler.handle_webhook(payload)
+    return JSONResponse(content=result)
+
+
+@app.post("/webhooks/sms")
+async def sms_webhook(request: Request) -> JSONResponse:
+    payload = await request.json()
+    result = await _sms_handler.handleInboundSms(payload)
+    return JSONResponse(content=result)
 
 
 def cli() -> None:
