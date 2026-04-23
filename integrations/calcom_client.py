@@ -13,3 +13,8 @@ class CalComClient:
         booking = {"attendee_email": attendee_email, "slot": slot_iso, "sandbox": self.sandbox, "mock_mode": self.mock_mode}
         self.bookings.append(booking)
         return {"status": "simulated_confirmed" if self.mock_mode else "confirmed", **booking}
+
+    async def createBooking(self, prospect: dict[str, Any]) -> dict[str, Any]:
+        attendee_email = str(prospect.get("email", ""))
+        slot_iso = str(prospect.get("slot_iso", ""))
+        return await self.create_booking(attendee_email=attendee_email, slot_iso=slot_iso)
