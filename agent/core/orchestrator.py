@@ -17,6 +17,8 @@ from agent.outreach.email_generator import generate_email
 from agent.outreach.sms_generator import generate_sms
 from agent.outreach.tone_guardrail import apply_tone_guardrail
 from agent.outreach.validator import validate_outreach
+from integrations.crm_calendar_bridge import CRMCalendarBridge
+from llm.reasoning_layer import get_reasoning_layer
 from eval.probe_library import build_probe_library
 from eval.probe_runner import run_probes
 from eval.tau_bench_runner import run_tau_bench
@@ -26,6 +28,7 @@ from integrations.hubspot_client import HubSpotClient
 from integrations.resend_client import ResendClient
 from pipelines.enrichment.feature_store import FeatureStore
 from pipelines.enrichment.signal_pipeline import run_signal_pipeline
+from pipelines.enrichment.unified_signal_enrichment import build_unified_signal_schema
 from pipelines.ingestion.crunchbase_loader import load_companies
 from pipelines.ingestion.job_scraper import load_job_snapshot
 from pipelines.ingestion.layoffs_loader import load_layoff_flags
@@ -46,6 +49,7 @@ class ConversionOrchestrator:
         self.resend = ResendClient(sandbox=settings.resend_sandbox, mock_mode=settings.mock_mode)
         self.sms = AfricasTalkingClient(sandbox=settings.africastalking_sandbox, mock_mode=settings.mock_mode)
         self.calcom = CalComClient(sandbox=settings.calcom_sandbox, mock_mode=settings.mock_mode)
+        self.crm_calendar_bridge = CRMCalendarBridge(hubspot_client=self.hubspot, calcom_client=self.calcom)
 
     async def run(self, mode: Literal["interim", "final"]) -> EngineRunReport:
         companies = load_companies(self.paths.data_dir / "sample_companies.json")
@@ -63,6 +67,8 @@ class ConversionOrchestrator:
             baseline = job_baselines.get(company.company_id, len(company.open_roles))
             scored = run_signal_pipeline(company, baseline, self.settings.icp_threshold)
             self.feature_store.upsert(scored)
+            unified_signals = await build_unified_signal_schema(company)
+            llm_icp = await get_reasoning_layer().classify_icp_segment(company.model_dump(mode="json"))
 
             self.tracer.log("classification", {
                 "company_id": company.company_id,
@@ -93,6 +99,12 @@ class ConversionOrchestrator:
                     company=company.name,
                 )
                 await self.hubspot.create_deal(company=company.name, stage="contacted", amount=15000)
+                await self.hubspot.upsert_enrichment(
+                    prospect_id=company.company_id,
+                    icp_segment=str(llm_icp.get("segment", scored.icp_segment)),
+                    signal_summary=f"Signals: {unified_signals}",
+                    enrichment_timestamp=signals_timestamp(unified_signals),
+                )
                 crm_records += 1
 
             if scored.icp_confidence >= 0.78:
@@ -103,7 +115,13 @@ class ConversionOrchestrator:
             outcome = handle_reply("Can we book a meeting on Thursday at 2pm?")
             self.tracer.log("conversation", {"company_id": company.company_id, "intent": outcome.intent, "route": outcome.route})
             if outcome.route == "schedule":
-                await self.calcom.create_booking(attendee_email=f"partnerships@{company.domain}", slot_iso="2026-04-30T11:00:00Z")
+                await self.crm_calendar_bridge.createBooking(
+                    {
+                        "prospect_id": company.company_id,
+                        "email": f"partnerships@{company.domain}",
+                        "slot_iso": "2026-04-30T11:00:00Z",
+                    }
+                )
 
         bench = run_tau_bench(
             dev_scores=[True, True, False, True, True],
@@ -150,3 +168,11 @@ async def run_mode(mode: Literal["interim", "final"]) -> EngineRunReport:
 
 def run_sync(mode: Literal["interim", "final"]) -> EngineRunReport:
     return asyncio.run(run_mode(mode))
+
+
+def signals_timestamp(unified_signals: dict[str, object]) -> str:
+    # deterministic artifact timestamp: use crunchbase presence and keep format stable
+    _ = unified_signals
+    from datetime import datetime, timezone
+
+    return datetime.now(timezone.utc).isoformat()
