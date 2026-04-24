@@ -34,7 +34,7 @@ def _write_baseline(path: Path, score: dict[str, object]) -> None:
 
 
 def run_act_i(output_dir: Path) -> dict[str, object]:
-    score = run_tau2_dev_slice_sync(task_count=30, trials=2, output_dir=output_dir)
+    score = run_tau2_dev_slice_sync(task_count=30, trials=1, output_dir=output_dir)
     _write_baseline(output_dir / "baseline.md", score)
     return score
 

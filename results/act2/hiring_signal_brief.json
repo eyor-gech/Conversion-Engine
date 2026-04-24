@@ -1,0 +1,55 @@
+{
+  "company": {
+    "name": "NileLedger",
+    "domain": "nileledger.com"
+  },
+  "signals": {
+    "crunchbase": {
+      "payload": {
+        "name": "NileLedger",
+        "industry": "fintech",
+        "employee_count": 420,
+        "summary": "normalized_fallback"
+      },
+      "confidenceScore": 0.7,
+      "source": "crunchbase"
+    },
+    "jobPosts": {
+      "payload": {
+        "role_categories": {
+          "ai_ml": 1,
+          "other": 2
+        },
+        "hiring_intent": "expansion",
+        "confidence": 0.62
+      },
+      "confidenceScore": 0.62,
+      "source": "jobs"
+    },
+    "layoffs": {
+      "payload": {
+        "severity": "low",
+        "impact_reasoning": "fallback classification from structured layoffs flag",
+        "confidence": 0.61
+      },
+      "confidenceScore": 0.61,
+      "source": "layoffs.fyi"
+    },
+    "leadershipChanges": {
+      "payload": {
+        "detected_at": "2026-04-24T17:47:06.437853+00:00",
+        "changes": [
+          "New CTO joined in Q1 2026"
+        ],
+        "llm_confirmation": {
+          "confirmed": true,
+          "rationale": "fallback based on explicit leadership change list",
+          "confidence": 0.66
+        }
+      },
+      "confidenceScore": 0.66,
+      "source": "news/signal"
+    }
+  },
+  "justification": "Signals merged from structured ingestion and LLM reasoning layer."
+}

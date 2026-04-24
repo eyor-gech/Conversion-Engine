@@ -18,11 +18,11 @@ def _percentile(values: list[float], q: float) -> float:
     return ordered[idx]
 
 
-async def run_tau2_dev_slice(*, task_count: int = 30, trials: int = 2, output_dir: Path | None = None) -> dict[str, object]:
+async def run_tau2_dev_slice(*, task_count: int = 30, trials: int = 1, output_dir: Path | None = None) -> dict[str, object]:
     out_dir = output_dir or Path(__file__).resolve().parents[1]
     out_dir.mkdir(parents=True, exist_ok=True)
-    trace_file = out_dir / "trace_log.jsonl"
-    score_file = out_dir / "score_log.json"
+    trace_file = out_dir / "trace_log2.jsonl"
+    score_file = out_dir / "score_log2.json"
 
     client = get_openrouter_client()
     latencies: list[float] = []

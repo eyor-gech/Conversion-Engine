@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Awaitable, Callable
 
 from core.event_bus import get_email_event_bus
+from core.event_schema import ErrorCode
 from llm.reasoning_layer import get_reasoning_layer
 
 ReplyHandler = Callable[[dict[str, Any]], Awaitable[None] | None]
@@ -25,21 +26,21 @@ class EmailHandler:
             )
             return result
         except Exception as exc:
-            error_payload = {"error_type": "send_failure", "provider": "resend", "to_email": to_email, "detail": str(exc)}
+            error_payload = {"error_type": ErrorCode.send_failure.value, "provider": "resend", "to_email": to_email, "detail": str(exc)}
             await self.event_bus.emit("error", error_payload)
             raise
 
     async def handle_webhook(self, payload: dict[str, Any]) -> dict[str, Any]:
         event = str(payload.get("event", "")).strip().lower()
         if not event:
-            error_payload = {"error_type": "malformed_webhook", "provider": "resend", "payload": payload}
+            error_payload = {"error_type": ErrorCode.malformed_webhook.value, "provider": "resend", "payload": payload}
             await self.event_bus.emit("error", error_payload)
             return {"accepted": False, "error": "missing_event"}
 
         if event in {"bounce", "bounced"}:
             bounce_payload = {"event": "bounce", "payload": payload}
             await self.event_bus.emit("bounce", bounce_payload)
-            await self.event_bus.emit("error", {"error_type": "bounce_event", "provider": "resend", "payload": payload})
+            await self.event_bus.emit("error", {"error_type": ErrorCode.bounce_event.value, "provider": "resend", "payload": payload})
             return {"accepted": True, "event": "bounce"}
 
         if event in {"reply", "inbound"}:
@@ -49,7 +50,6 @@ class EmailHandler:
             await self.event_bus.emit("reply", reply_payload)
             return {"accepted": True, "event": "reply", "intent": llm_structured.get("intent")}
 
-        unknown_payload = {"error_type": "unsupported_webhook_event", "provider": "resend", "payload": payload}
+        unknown_payload = {"error_type": ErrorCode.unsupported_event.value, "provider": "resend", "payload": payload}
         await self.event_bus.emit("error", unknown_payload)
         return {"accepted": False, "error": "unsupported_event"}
-

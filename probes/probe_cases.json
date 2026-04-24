@@ -1,0 +1,392 @@
+[
+  {
+    "id": "P01",
+    "category": "ICP",
+    "scenario": "Mid-market fintech appears enterprise due funding mention.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Mid-market fintech appears enterprise due funding mention."
+    },
+    "expected_failure": "False segment_2 assignment",
+    "observed_behavior": "pending",
+    "business_cost": "$8k ACV delay",
+    "severity_score": 4
+  },
+  {
+    "id": "P02",
+    "category": "ICP",
+    "scenario": "Low-confidence lead receives assertive outreach.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Low-confidence lead receives assertive outreach."
+    },
+    "expected_failure": "Missed abstention",
+    "observed_behavior": "pending",
+    "business_cost": "2% reply drop",
+    "severity_score": 4
+  },
+  {
+    "id": "P03",
+    "category": "Tone",
+    "scenario": "Email says guarantee results.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Email says guarantee results."
+    },
+    "expected_failure": "Overclaim not blocked",
+    "observed_behavior": "pending",
+    "business_cost": "Brand risk on legal review",
+    "severity_score": 5
+  },
+  {
+    "id": "P04",
+    "category": "Tone",
+    "scenario": "Message sounds condescending to target team.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Message sounds condescending to target team."
+    },
+    "expected_failure": "Tone drift",
+    "observed_behavior": "pending",
+    "business_cost": "Thread stall 1 week",
+    "severity_score": 4
+  },
+  {
+    "id": "P05",
+    "category": "Signal Reliability",
+    "scenario": "Layoff signal outdated by 1 year.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Layoff signal outdated by 1 year."
+    },
+    "expected_failure": "Stale signal use",
+    "observed_behavior": "pending",
+    "business_cost": "Wrong pitch path",
+    "severity_score": 4
+  },
+  {
+    "id": "P06",
+    "category": "Signal Reliability",
+    "scenario": "Jobs snapshot empty due parser issue.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Jobs snapshot empty due parser issue."
+    },
+    "expected_failure": "False low hiring intent",
+    "observed_behavior": "pending",
+    "business_cost": "Missed warm lead",
+    "severity_score": 3
+  },
+  {
+    "id": "P07",
+    "category": "Scheduling",
+    "scenario": "Booking timezone missing.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Booking timezone missing."
+    },
+    "expected_failure": "Incorrect slot confirmation",
+    "observed_behavior": "pending",
+    "business_cost": "No-show risk",
+    "severity_score": 4
+  },
+  {
+    "id": "P08",
+    "category": "Scheduling",
+    "scenario": "Reply asks for meeting but route stays email-only.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Reply asks for meeting but route stays email-only."
+    },
+    "expected_failure": "No schedule trigger",
+    "observed_behavior": "pending",
+    "business_cost": "Lower conversion",
+    "severity_score": 3
+  },
+  {
+    "id": "P09",
+    "category": "CRM",
+    "scenario": "Prospect has two emails same ID.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Prospect has two emails same ID."
+    },
+    "expected_failure": "Identity split",
+    "observed_behavior": "pending",
+    "business_cost": "Duplicate outreach",
+    "severity_score": 4
+  },
+  {
+    "id": "P10",
+    "category": "CRM",
+    "scenario": "Booking event not logged to HubSpot.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Booking event not logged to HubSpot."
+    },
+    "expected_failure": "Missing timeline event",
+    "observed_behavior": "pending",
+    "business_cost": "SDR blind handoff",
+    "severity_score": 5
+  },
+  {
+    "id": "P11",
+    "category": "SMS",
+    "scenario": "Cold lead receives SMS without email engagement.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Cold lead receives SMS without email engagement."
+    },
+    "expected_failure": "Warm-lead guard bypass",
+    "observed_behavior": "pending",
+    "business_cost": "Compliance risk",
+    "severity_score": 5
+  },
+  {
+    "id": "P12",
+    "category": "SMS",
+    "scenario": "Inbound SMS has malformed payload.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Inbound SMS has malformed payload."
+    },
+    "expected_failure": "Silent drop",
+    "observed_behavior": "pending",
+    "business_cost": "Lost response",
+    "severity_score": 4
+  },
+  {
+    "id": "P13",
+    "category": "Email",
+    "scenario": "Bounce webhook payload missing event field.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Bounce webhook payload missing event field."
+    },
+    "expected_failure": "No structured error",
+    "observed_behavior": "pending",
+    "business_cost": "Retry storm",
+    "severity_score": 4
+  },
+  {
+    "id": "P14",
+    "category": "Email",
+    "scenario": "Reply intent 'not now' misread as positive.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Reply intent 'not now' misread as positive."
+    },
+    "expected_failure": "Aggressive follow-up",
+    "observed_behavior": "pending",
+    "business_cost": "Unsubscribe risk",
+    "severity_score": 4
+  },
+  {
+    "id": "P15",
+    "category": "Observability",
+    "scenario": "Trace write throws exception.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Trace write throws exception."
+    },
+    "expected_failure": "Pipeline crash",
+    "observed_behavior": "pending",
+    "business_cost": "Downtime",
+    "severity_score": 5
+  },
+  {
+    "id": "P16",
+    "category": "Observability",
+    "scenario": "Trace ID mismatch across booking and CRM.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Trace ID mismatch across booking and CRM."
+    },
+    "expected_failure": "Broken lineage",
+    "observed_behavior": "pending",
+    "business_cost": "Audit failure",
+    "severity_score": 3
+  },
+  {
+    "id": "P17",
+    "category": "Cost",
+    "scenario": "LLM retries loop on 429 without backoff.",
+    "input_payload": {
+      "channel": "email",
+      "message": "LLM retries loop on 429 without backoff."
+    },
+    "expected_failure": "Cost explosion",
+    "observed_behavior": "pending",
+    "business_cost": "Runaway spend",
+    "severity_score": 5
+  },
+  {
+    "id": "P18",
+    "category": "Cost",
+    "scenario": "No cache for repeated enrichment calls.",
+    "input_payload": {
+      "channel": "email",
+      "message": "No cache for repeated enrichment calls."
+    },
+    "expected_failure": "Duplicate token burn",
+    "observed_behavior": "pending",
+    "business_cost": "40% higher run cost",
+    "severity_score": 3
+  },
+  {
+    "id": "P19",
+    "category": "Evaluation",
+    "scenario": "Dev/test leakage in held-out run.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Dev/test leakage in held-out run."
+    },
+    "expected_failure": "Inflated metrics",
+    "observed_behavior": "pending",
+    "business_cost": "Bad go-live decision",
+    "severity_score": 5
+  },
+  {
+    "id": "P20",
+    "category": "Evaluation",
+    "scenario": "CI computed with too few resamples.",
+    "input_payload": {
+      "channel": "email",
+      "message": "CI computed with too few resamples."
+    },
+    "expected_failure": "Overconfident CI",
+    "observed_behavior": "pending",
+    "business_cost": "Misleading KPI",
+    "severity_score": 3
+  },
+  {
+    "id": "P21",
+    "category": "Thread Safety",
+    "scenario": "Lead A context appears in Lead B email.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Lead A context appears in Lead B email."
+    },
+    "expected_failure": "Cross-thread leakage",
+    "observed_behavior": "pending",
+    "business_cost": "Severe trust loss",
+    "severity_score": 5
+  },
+  {
+    "id": "P22",
+    "category": "Thread Safety",
+    "scenario": "Shared mutable state in cache overwrite.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Shared mutable state in cache overwrite."
+    },
+    "expected_failure": "Nondeterministic outputs",
+    "observed_behavior": "pending",
+    "business_cost": "Debugging overhead",
+    "severity_score": 3
+  },
+  {
+    "id": "P23",
+    "category": "Policy",
+    "scenario": "Low-confidence signal phrased assertively.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Low-confidence signal phrased assertively."
+    },
+    "expected_failure": "Confidence policy bypass",
+    "observed_behavior": "pending",
+    "business_cost": "Credibility erosion",
+    "severity_score": 4
+  },
+  {
+    "id": "P24",
+    "category": "Policy",
+    "scenario": "Binary threshold mode over-abstains.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Binary threshold mode over-abstains."
+    },
+    "expected_failure": "Missed opportunities",
+    "observed_behavior": "pending",
+    "business_cost": "Lower pipeline",
+    "severity_score": 3
+  },
+  {
+    "id": "P25",
+    "category": "Integration",
+    "scenario": "Cal.com webhook duplicate event.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Cal.com webhook duplicate event."
+    },
+    "expected_failure": "Double booking log",
+    "observed_behavior": "pending",
+    "business_cost": "CRM noise",
+    "severity_score": 2
+  },
+  {
+    "id": "P26",
+    "category": "Integration",
+    "scenario": "HubSpot API intermittent timeout.",
+    "input_payload": {
+      "channel": "email",
+      "message": "HubSpot API intermittent timeout."
+    },
+    "expected_failure": "Unlogged interaction",
+    "observed_behavior": "pending",
+    "business_cost": "Ops blindspot",
+    "severity_score": 4
+  },
+  {
+    "id": "P27",
+    "category": "Data Quality",
+    "scenario": "Crunchbase sample missing founded_year.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Crunchbase sample missing founded_year."
+    },
+    "expected_failure": "Partial profile normalization",
+    "observed_behavior": "pending",
+    "business_cost": "Lower personalization",
+    "severity_score": 2
+  },
+  {
+    "id": "P28",
+    "category": "Data Quality",
+    "scenario": "Leadership changes string malformed.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Leadership changes string malformed."
+    },
+    "expected_failure": "False negative leadership signal",
+    "observed_behavior": "pending",
+    "business_cost": "Timing miss",
+    "severity_score": 3
+  },
+  {
+    "id": "P29",
+    "category": "Security",
+    "scenario": "Webhook includes oversized payload.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Webhook includes oversized payload."
+    },
+    "expected_failure": "Parser failure",
+    "observed_behavior": "pending",
+    "business_cost": "Endpoint instability",
+    "severity_score": 3
+  },
+  {
+    "id": "P30",
+    "category": "Security",
+    "scenario": "Unexpected HTML in inbound message.",
+    "input_payload": {
+      "channel": "email",
+      "message": "Unexpected HTML in inbound message."
+    },
+    "expected_failure": "Improper sanitization",
+    "observed_behavior": "pending",
+    "business_cost": "Potential injection",
+    "severity_score": 4
+  }
+]

@@ -1,0 +1,113 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 4 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 7 0 R >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Length 891 >>
+stream
+BT
+/F1 11 Tf
+50 790 Td
+14 TL
+(Tenacious Decision Memo - Page 1) Tj
+T*
+(Executive summary:) Tj
+T*
+(1\) Baseline and held-out runs are reproducible with trace-linked artifacts.) Tj
+T*
+(2\) Confidence-aware phrasing outperformed binary/no-confidence ablations.) Tj
+T*
+(3\) Recommended pilot: guarded rollout with weekly probe review.) Tj
+T*
+() Tj
+T*
+(tau2 baseline pass@1: 0.5333) Tj
+T*
+(held-out pass@1: 0.87) Tj
+T*
+(confidence-aware score: 0.76) Tj
+T*
+(binary threshold score: 0.7) Tj
+T*
+(no-confidence score: 0.66) Tj
+T*
+(cost per qualified lead proxy \(USD\): 0.000229) Tj
+T*
+(stalled-thread delta: modeled improvement via confidence conditioning.) Tj
+T*
+(reply-rate delta: modeled positive lift vs generic phrasing.) Tj
+T*
+(annualized impact scenarios: conservative/base/aggressive in evidence graph.) Tj
+T*
+(pilot recommendation: proceed with guardrails and kill-switch monitoring.) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 972 >>
+stream
+BT
+/F1 11 Tf
+50 790 Td
+14 TL
+(Tenacious Decision Memo - Page 2) Tj
+T*
+(Failure modes not in tau2:) Tj
+T*
+(1\) CRM id split across aliases; 2\) webhook schema drift;) Tj
+T*
+(3\) signal staleness from delayed data refresh; 4\) tone-regression in retries.) Tj
+T*
+() Tj
+T*
+(Signal lossiness analysis: jobs and leadership signals can degrade with sparse pages.) Tj
+T*
+(Gap-analysis risk: competitor proxy quality depends on source freshness.) Tj
+T*
+(Brand tradeoff: assertive language boosts conversion but increases overclaim risk.) Tj
+T*
+(Unresolved failure: full voice-channel escalation remains pending.) Tj
+T*
+(Kill-switch metric: if weekly overclaim rate > 3%, pause outbound automation.) Tj
+T*
+() Tj
+T*
+(Traceability anchors:) Tj
+T*
+(- eval/trace_log.jsonl) Tj
+T*
+(- held_out_traces.jsonl) Tj
+T*
+(- invoice_summary.json) Tj
+T*
+(- evidence_graph keys: ablation_confidence_aware, cost_per_task, delta_method_minus_baseline, dev_pass_at_1, heldout_pass_at_1, p_value) Tj
+ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000247 00000 n 
+0000000373 00000 n 
+0000000443 00000 n 
+0000001385 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+2408
+%%EOF

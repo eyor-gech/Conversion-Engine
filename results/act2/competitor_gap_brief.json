@@ -1,0 +1,37 @@
+{
+  "company": {
+    "name": "NileLedger",
+    "domain": "nileledger.com"
+  },
+  "competitor_gap": {
+    "top_peers": [
+      "ClinixFlow",
+      "AtlasProcure"
+    ],
+    "relative_maturity_ranking": [
+      {
+        "company": "ClinixFlow",
+        "maturity_proxy": 0.55
+      },
+      {
+        "company": "AtlasProcure",
+        "maturity_proxy": 0.43
+      }
+    ],
+    "missing_capabilities": [
+      "backend engineer",
+      "mlops engineer",
+      "revops manager",
+      "sales ops analyst"
+    ],
+    "distribution_position": {
+      "percentile": 100.0,
+      "maturity_proxy_score": 0.86,
+      "universe_size": 2,
+      "note": "NileLedger ranks at the 100.0th percentile across 2 companies by maturity proxy score."
+    },
+    "evidence_note": "Capability gaps derived from public job post titles via structured data snapshot (data/jobs_snapshot.json). Same scoring function (github_activity_score + role count) as AI maturity pipeline.",
+    "tone_note": "Use neutral language focused on opportunity, not deficiency.",
+    "sparse_sector_note": "Sparse sector ('fintech'): only 0 same-industry peer(s) found; cross-sector peers used for ranking. Interpret capability gaps with caution."
+  }
+}
