@@ -23,15 +23,15 @@ and structured for clean handoff to the next engineer.
 flowchart TD
     subgraph Ingestion
         A1[sample_companies.json] --> L1[crunchbase_loader]
-        A2[jobs_snapshot.json] --> L2[job_scraper\n+ robots.txt check]
+        A2[jobs_snapshot.json] --> L2[job_scraper<br/>+ robots.txt check]
         A3[layoffs.csv] --> L3[layoffs_loader]
     end
 
     subgraph Enrichment
-        L1 & L2 & L3 --> SIG[signal_pipeline\nscoring.py]
-        SIG --> MAT[ai_maturity.py\n6 signals]
-        SIG --> ICP[icp_classifier.py\nthreshold=0.62]
-        MAT & ICP --> INS[insight_engine\nhiring_brief + competitor_gap]
+        L1 & L2 & L3 --> SIG[signal_pipeline<br/>scoring.py]
+        SIG --> MAT[ai_maturity.py<br/>6 signals]
+        SIG --> ICP[icp_classifier.py<br/>threshold=0.62]
+        MAT & ICP --> INS[insight_engine<br/>hiring_brief + competitor_gap]
     end
 
     subgraph Outreach
@@ -43,22 +43,22 @@ flowchart TD
     end
 
     subgraph Integrations
-        VAL --> HS[HubSpot\ncontact + deal + enrichment]
-        VAL --> RS[Resend\nemail send]
-        SMS_GUARD --> AT[Africa's Talking\nSMS send]
-        HS --> CAL[Cal.com\nbooking]
+        VAL --> HS[HubSpot<br/>contact + deal + enrichment]
+        VAL --> RS[Resend<br/>email send]
+        SMS_GUARD --> AT[Africas Talking<br/>SMS send]
+        HS --> CAL[Cal.com<br/>booking]
     end
 
     subgraph Routing
-        RS --> EH[email_handler\nwebhook]
-        AT --> SH[sms_handler\nwebhook]
-        EH & SH --> RH[reply_handler\nintent → route]
+        RS --> EH[email_handler<br/>webhook]
+        AT --> SH[sms_handler<br/>webhook]
+        EH & SH --> RH[reply_handler<br/>intent to route]
     end
 
     subgraph Evaluation
-        RH --> TR[LangfuseTracer\ntrace_log.json]
-        TR --> PR[probe_runner\n30 adversarial probes]
-        TR --> TB[tau_bench_runner\npass@1 + CI]
+        RH --> TR[LangfuseTracer<br/>trace_log.json]
+        TR --> PR[probe_runner<br/>30 adversarial probes]
+        TR --> TB[tau_bench_runner<br/>pass_at_1 + CI]
         PR & TB --> EV[evidence_graph.json]
         EV --> MEMO[memo/memo.pdf]
     end
