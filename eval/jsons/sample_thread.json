@@ -1,0 +1,65 @@
+{
+  "thread_id": "thread-cmp_001",
+  "timestamp": "2026-04-24T08:28:14.305438+00:00",
+  "prospect_id": "cmp_001",
+  "email_send": {
+    "status": "simulated_queued",
+    "to": "partnerships@nileledger.com",
+    "subject": "NileLedger growth brief",
+    "body": "Based on moderate-confidence indicators, Hi NileLedger team, we prepared an outreach brief from hiring and competitor signals and can walk through practical next steps this week.",
+    "sandbox": true,
+    "mock_mode": true
+  },
+  "email_reply": {
+    "accepted": true,
+    "event": "reply",
+    "intent": "unknown"
+  },
+  "qualification": {
+    "intent": "unknown",
+    "sentiment": "positive",
+    "confidence": 0.6,
+    "structured_response": {
+      "raw": "Thanks, interested. Can we book Thursday 2pm?"
+    }
+  },
+  "sms": {
+    "accepted": true,
+    "provider_response": {
+      "status": "simulated_queued",
+      "to": "+254700000000",
+      "message": "Happy to share a booking link for Thursday options.",
+      "sandbox": true,
+      "mock_mode": true
+    },
+    "llm_eval": {
+      "allow_sms": true,
+      "confidence": 0.55,
+      "reason": "fallback heuristic"
+    }
+  },
+  "booking": {
+    "booking": {
+      "status": "simulated_confirmed",
+      "attendee_email": "partnerships@nileledger.com",
+      "slot": "2026-05-01T11:00:00Z",
+      "sandbox": true,
+      "mock_mode": true
+    },
+    "hubspot_update": {
+      "prospect_id": "cmp_001",
+      "booking_summary": "[MOCK:summarization] Write a short booking summary for CRM timeline. Return plain text only.\n{\"prospect\": {\"prospect_id\": \"cmp_001\", \"email\": \"partnerships@nileledger.com\", \"slot_iso\": \"2026-05-01T11:0",
+      "booking_payload": {
+        "status": "simulated_confirmed",
+        "attendee_email": "partnerships@nileledger.com",
+        "slot": "2026-05-01T11:00:00Z",
+        "sandbox": true,
+        "mock_mode": true
+      },
+      "sandbox": true,
+      "mock_mode": true
+    },
+    "prospect_id": "cmp_001",
+    "updated_at": "2026-04-24T08:28:14.305438+00:00"
+  }
+}

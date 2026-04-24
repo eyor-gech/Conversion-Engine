@@ -9,4 +9,5 @@ score_log.json
 trace_log.json
 trace_log.jsonl
 baseline.md
-old artifacts
+old artifacts/
+.claude/

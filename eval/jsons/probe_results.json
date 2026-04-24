@@ -1,0 +1,262 @@
+{
+  "total_probes": 30,
+  "trigger_rate_by_category": {
+    "ICP": 1.0,
+    "Tone": 1.0,
+    "Signal Reliability": 1.0,
+    "Scheduling": 1.0,
+    "CRM": 1.0,
+    "SMS": 1.0,
+    "Email": 1.0,
+    "Observability": 1.0,
+    "Cost": 1.0,
+    "Evaluation": 1.0,
+    "Thread Safety": 1.0,
+    "Policy": 1.0,
+    "Integration": 1.0,
+    "Data Quality": 1.0,
+    "Security": 1.0
+  },
+  "traces": [
+    {
+      "trace_id": "9d9b9d7a-da97-4728-8c01-ffa904514068",
+      "id": "P01",
+      "category": "ICP",
+      "expected_failure": "False segment_2 assignment",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "934b08d3-61e8-4067-987c-50ca7968e542",
+      "id": "P02",
+      "category": "ICP",
+      "expected_failure": "Missed abstention",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "a420ea4a-6263-43aa-8a75-a0d7e34949b8",
+      "id": "P03",
+      "category": "Tone",
+      "expected_failure": "Overclaim not blocked",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "d73647df-8fa6-4c88-b7ea-8aece41813cf",
+      "id": "P04",
+      "category": "Tone",
+      "expected_failure": "Tone drift",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "483d1ffd-349d-475b-8ed8-fc97a8b80fbb",
+      "id": "P05",
+      "category": "Signal Reliability",
+      "expected_failure": "Stale signal use",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "0a73bd64-1021-4e4c-a65b-2a5b192af8a8",
+      "id": "P06",
+      "category": "Signal Reliability",
+      "expected_failure": "False low hiring intent",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "629338ae-023a-48fb-a3ba-2dd91d90cfca",
+      "id": "P07",
+      "category": "Scheduling",
+      "expected_failure": "Incorrect slot confirmation",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "33d2c3a1-339a-4f9d-9225-4689a21db750",
+      "id": "P08",
+      "category": "Scheduling",
+      "expected_failure": "No schedule trigger",
+      "observed_behavior": "book_meeting",
+      "triggered": true
+    },
+    {
+      "trace_id": "b95a64c2-7364-4d85-bde6-9cceac2ed53f",
+      "id": "P09",
+      "category": "CRM",
+      "expected_failure": "Identity split",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "8d200e46-c842-4670-b076-8fb41e70cc15",
+      "id": "P10",
+      "category": "CRM",
+      "expected_failure": "Missing timeline event",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "b3884886-cff1-4347-bb14-451264bd273f",
+      "id": "P11",
+      "category": "SMS",
+      "expected_failure": "Warm-lead guard bypass",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "e9b507c0-2a6f-4610-aa62-aa729c3d64ab",
+      "id": "P12",
+      "category": "SMS",
+      "expected_failure": "Silent drop",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "333a582a-618b-47b4-969e-bc655d17248f",
+      "id": "P13",
+      "category": "Email",
+      "expected_failure": "No structured error",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "8c731819-dc2f-4b3c-8517-fdb0e0ce0636",
+      "id": "P14",
+      "category": "Email",
+      "expected_failure": "Aggressive follow-up",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "b851ce42-88e1-45d7-b6a9-47980beba79f",
+      "id": "P15",
+      "category": "Observability",
+      "expected_failure": "Pipeline crash",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "e9bb39e4-bc62-4870-83e6-aa2306dc91d2",
+      "id": "P16",
+      "category": "Observability",
+      "expected_failure": "Broken lineage",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "f87b3a04-3def-435c-8f82-1d202affa003",
+      "id": "P17",
+      "category": "Cost",
+      "expected_failure": "Cost explosion",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "161766d7-f86d-442f-87f2-571e33e364b7",
+      "id": "P18",
+      "category": "Cost",
+      "expected_failure": "Duplicate token burn",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "93aa26ac-8470-4201-aa09-e04f2e31d40d",
+      "id": "P19",
+      "category": "Evaluation",
+      "expected_failure": "Inflated metrics",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "fb158f82-3191-4b7c-98b9-bded0cc14fcc",
+      "id": "P20",
+      "category": "Evaluation",
+      "expected_failure": "Overconfident CI",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "bc15d63c-5e0b-41a1-a5be-78be67265c9f",
+      "id": "P21",
+      "category": "Thread Safety",
+      "expected_failure": "Cross-thread leakage",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "53b113ed-c7c8-46d5-99f3-373c94e21bbc",
+      "id": "P22",
+      "category": "Thread Safety",
+      "expected_failure": "Nondeterministic outputs",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "5eea8303-bbe5-47fd-b20b-8eabed9029d1",
+      "id": "P23",
+      "category": "Policy",
+      "expected_failure": "Confidence policy bypass",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "31690307-448a-4130-ada4-7a2f0c1a4a37",
+      "id": "P24",
+      "category": "Policy",
+      "expected_failure": "Missed opportunities",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "e23823cc-cf8c-4c8c-a680-4c25033a6c81",
+      "id": "P25",
+      "category": "Integration",
+      "expected_failure": "Double booking log",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "17bdaf35-2d90-4b7a-bf06-0ba25cb6c512",
+      "id": "P26",
+      "category": "Integration",
+      "expected_failure": "Unlogged interaction",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "107afb6e-e2f9-4e5b-9c76-b27cf7ee57d5",
+      "id": "P27",
+      "category": "Data Quality",
+      "expected_failure": "Partial profile normalization",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "3b84f136-89f2-4333-b284-c05f520459a7",
+      "id": "P28",
+      "category": "Data Quality",
+      "expected_failure": "False negative leadership signal",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "9d8863d1-dc36-4a99-b536-6cf1659e2190",
+      "id": "P29",
+      "category": "Security",
+      "expected_failure": "Parser failure",
+      "observed_behavior": "unknown",
+      "triggered": true
+    },
+    {
+      "trace_id": "73a813eb-ec01-462c-bd68-f8427d409de5",
+      "id": "P30",
+      "category": "Security",
+      "expected_failure": "Improper sanitization",
+      "observed_behavior": "unknown",
+      "triggered": true
+    }
+  ]
+}
