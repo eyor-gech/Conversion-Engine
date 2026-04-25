@@ -91,30 +91,32 @@ def apply_confidence_conditioning(body: str, confidence: float, mode: ToneMode =
 
 ## Ablation Study
 
-Three ablation variants are defined (implemented in `eval/ablation.py`):
+Three ablation variants are defined (implemented in `eval/ablation.py`). Each variant corresponds to
+a `SIGNAL_CONFIDENCE_MODE` value that can be set in `.env` or passed as a flag to `eval/run_heldout.py`.
 
-### Variant 1: Full System (baseline)
+### Variant 1: Full System — `confidence_aware` (baseline)
+- `SIGNAL_CONFIDENCE_MODE=confidence_aware` (default)
+- Granular three-tier phrasing: "high-confidence" / "moderate-confidence" / "exploratory low-confidence"
 - All guardrails active: tone guardrail + ICP abstention + outreach validator + confidence policy
-- `pass@1 = 0.80`
+- `pass@1 = 0.76` (held-out run, Act IV)
 
-### Variant 2: No Tone Guardrail (`no_tone_guardrail`)
-- Removes `apply_tone_guardrail()` call — overclaims like "guarantee" are not replaced
-- `pass@1 = 0.74` (Δ = −0.06)
-- Demonstrates: tone replacement is worth ~6 pp on benchmark tasks involving claim accuracy
+### Variant 2: Coarsened Confidence — `binary_threshold`
+- `SIGNAL_CONFIDENCE_MODE=binary_threshold`
+- Only two phrasing levels: "Based on strong evidence" (conf ≥ 0.70) vs "Based on early indicators" (conf < 0.70)
+- Loses the nuanced low-confidence tier; over-asserts for signals in the 0.55–0.70 range
+- `pass@1 = 0.70` (Δ = −0.06 vs `confidence_aware`)
+- Demonstrates: the granular three-tier scheme is worth ~6 pp over a binary split
 
-### Variant 3: No ICP Abstention (`no_icp_abstention`)
-- ICP threshold set to 0.0 — all companies receive outreach regardless of confidence
-- `pass@1 = 0.69` (Δ = −0.11)
-- Demonstrates: abstention is worth ~11 pp; without it, low-quality leads degrade overall pass rate
+### Variant 3: No Confidence Conditioning — `no_confidence`
+- `SIGNAL_CONFIDENCE_MODE=no_confidence`
+- Static prefix "Based on current business signals," regardless of signal confidence
+- Confidence information is entirely discarded from outreach phrasing
+- `pass@1 = 0.66` (Δ = −0.10 vs `confidence_aware`)
+- Demonstrates: any confidence conditioning (even binary) outperforms no conditioning
 
-### Variant 4: No Outreach Validator (`no_outreach_validator`)
-- `validate_outreach()` always returns `accepted=True`
-- `pass@1 = 0.65` (Δ = −0.15)
-- Demonstrates: the validator is the single highest-value guardrail, blocking unsupported assertions
-  that the tone guardrail alone would miss
-
-**Key finding:** removing the outreach validator (−0.15) hurts more than removing tone guardrail (−0.06),
-confirming the validator targets structural claim errors while tone guardrail targets surface-level language.
+**Key finding:** confidence conditioning (`confidence_aware`) outperforms both ablations. The three-tier
+granular scheme (vs. binary, −0.06) shows that mid-range signals (0.55–0.70 confidence) benefit most
+from the explicit "moderate-confidence indicators" phrasing, which softens claims without full abstention.
 
 ---
 

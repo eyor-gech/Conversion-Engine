@@ -33,3 +33,37 @@ Total probes:
 - P28 | Data Quality | Leadership changes string malformed. | expected: False negative leadership signal | cost: Timing miss | severity: 3
 - P29 | Security | Webhook includes oversized payload. | expected: Parser failure | cost: Endpoint instability | severity: 3
 - P30 | Security | Unexpected HTML in inbound message. | expected: Improper sanitization | cost: Potential injection | severity: 4
+
+---
+
+## Rubric Category Coverage (10 Required Categories)
+
+All 30 probes map to one of the 10 rubric-required categories. Each category has at least 2 probes.
+
+| # | Rubric Category | Probes | Count |
+|---|---|---|---|
+| 1 | ICP Classification | P01, P02 | 2 |
+| 2 | Signal Reliability & Grounding | P05, P06, P27, P28 | 4 |
+| 3 | Tone & Language Policy | P03, P04, P23, P24 | 4 |
+| 4 | Scheduling & Routing | P07, P08 | 2 |
+| 5 | CRM & Calendar Integration | P09, P10, P25, P26 | 4 |
+| 6 | SMS Compliance & Consent | P11, P12 | 2 |
+| 7 | Email Delivery & Webhook Handling | P13, P14 | 2 |
+| 8 | Observability & Trace Integrity | P15, P16, P29, P30 | 4 |
+| 9 | Cost & Concurrency Safety | P17, P18, P21, P22 | 4 |
+| 10 | Evaluation & Test Integrity | P19, P20 | 2 |
+
+**Total: 30 probes across 10 rubric categories.**
+
+### Category Rationale
+
+- **ICP Classification (P01, P02):** Tests whether the segment classifier correctly handles boundary cases — a mid-market company that superficially resembles enterprise, and a low-confidence lead that should trigger abstention.
+- **Signal Reliability & Grounding (P05, P06, P27, P28):** Covers stale signals, empty snapshots, and malformed input data that would cause the enrichment pipeline to produce unreliable outputs.
+- **Tone & Language Policy (P03, P04, P23, P24):** Verifies the tone guardrail blocks overclaims ("guarantee"), catches condescending phrasing, and ensures confidence-aware conditioning is applied correctly.
+- **Scheduling & Routing (P07, P08):** Validates that booking flows handle missing timezone data and correctly escalate meeting requests from email to calendar scheduling.
+- **CRM & Calendar Integration (P09, P10, P25, P26):** Tests identity deduplication, booking event logging, duplicate webhook handling, and API timeout resilience.
+- **SMS Compliance & Consent (P11, P12):** Ensures the warm-lead gate prevents cold-SMS violations and that malformed inbound SMS payloads are handled without silent drops.
+- **Email Delivery & Webhook Handling (P13, P14):** Covers bounce webhook parsing and intent misclassification that would trigger inappropriate follow-ups.
+- **Observability & Trace Integrity (P15, P16, P29, P30):** Validates trace write resilience, trace ID consistency across systems, and input sanitization for oversized/malformed payloads.
+- **Cost & Concurrency Safety (P17, P18, P21, P22):** Tests retry-storm prevention, cache deduplication, cross-lead context isolation, and shared-state safety under concurrent load.
+- **Evaluation & Test Integrity (P19, P20):** Ensures dev/held-out data isolation and that confidence intervals are computed with sufficient bootstrap resamples.

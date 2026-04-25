@@ -19,10 +19,8 @@ async def run_enrichment(company: CompanyInput, universe: list[CompanyInput], ou
         "signals": unified,
         "justification": "Signals merged from structured ingestion and LLM reasoning layer.",
     }
-    competitor_gap_brief = {
-        "company": {"name": company.name, "domain": company.domain},
-        "competitor_gap": gap,
-    }
+    # gap is already schema-compliant (prospect_domain, prospect_sector, competitors_analyzed, etc.)
+    competitor_gap_brief = gap
 
     (output_dir / "hiring_signal_brief.json").write_text(
         json.dumps(hiring_signal_brief, indent=2, default=str),
